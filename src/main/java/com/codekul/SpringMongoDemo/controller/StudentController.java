@@ -78,11 +78,17 @@ public class StudentController {
         return "Student deleted";
     }
 
+    @PostMapping("/saveBook")
+    public String saveBook(@RequestBody Book book){
+        bookRepo.save(book);
+        return "Book saved";
+    }
+
     @PostMapping("/saveBookRef")
     public String saveBook(@RequestBody Student student){
         Book book=bookRepo.findByName(student.getBook().getName());
         studentRepo.save(student);
-        return "Student Saved Successfully";
+        return "Student Book Ref Saved Successfully";
     }
 
     @GetMapping("/getStudentBookRef/{city}")
@@ -92,11 +98,6 @@ public class StudentController {
         return objStud;
     }
 
-    @PostMapping("/saveBook")
-    public String saveBook(@RequestBody Book book){
-       bookRepo.save(book);
-        return "Book saved";
-    }
 
     @GetMapping("/textSearch/{searchData}")
     public List<Student> textSearch(@PathVariable String searchData){
